@@ -36,7 +36,8 @@ public class CategoriaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
+	//@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) { //response para trabalhar com o header da resposta
 		Categoria categoriaSalva = categoriaRepository.save(categoria);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
