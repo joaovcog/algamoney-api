@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @ControllerAdvice
-public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> { // intercepta objetos do tipo OAuth2AccessToken (poderia interceptar uma classe de Resource, por exemplo)
+public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken> { // intercepta objetos do tipo OAuth2AccessToken (poderia interceptar qualquer classe)
 
 	@Override
 	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
