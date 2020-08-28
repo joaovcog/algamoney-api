@@ -27,6 +27,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
+	//@CrossOrigin(maxAge = 10, origins = "http://localhost:8000") //default = permitir que todas as origens sejam autorizadas a fazer um GET em categorias
 	@GetMapping
 	public List<Categoria> listar() {
 		//List<Categoria> categorias = categoriaRepository.findAll();
