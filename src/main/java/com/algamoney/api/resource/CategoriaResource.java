@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,7 @@ public class CategoriaResource {
 	
 	//@CrossOrigin(maxAge = 10, origins = "http://localhost:8000") //default = permitir que todas as origens sejam autorizadas a fazer um GET em categorias
 	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
 	public List<Categoria> listar() {
 		//List<Categoria> categorias = categoriaRepository.findAll();
 		//return !categorias.isEmpty() ? ResponseEntity.ok(categorias) : ResponseEntity.notFound().build();
@@ -37,6 +39,7 @@ public class CategoriaResource {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
 	//@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) { //response para trabalhar com o header da resposta
 		Categoria categoriaSalva = categoriaRepository.save(categoria);
@@ -49,6 +52,7 @@ public class CategoriaResource {
 	}
 	
 	@GetMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
 	public ResponseEntity<Categoria> buscarPeloCodigo(@PathVariable Long codigo) {
 		Optional<Categoria> optCategoria = categoriaRepository.findById(codigo);
 		//optCategoria.map(categoria -> ResponseEntity.ok(categoria)).orElse(ResponseEntity.notFound().build());
