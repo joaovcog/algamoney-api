@@ -21,7 +21,7 @@ INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, obse
 INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Bahamas', '2017-06-10', null, 500, null, 'RECEITA', 1, 7);
 INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Top Club', '2017-03-10', '2017-03-10', 400.32, null, 'DESPESA', 4, 8);
 INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Despachante', '2017-06-10', null, 123.64, 'Multas', 'DESPESA', 3, 9);
-INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Pneus', '2017-04-10', '2017-04-10', 665.33, null, 'RECEITA', 5, 10);
+INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Pneus', '2017-04-10', '2017-04-10', 665.33, null, 'RECEITA', 5, 9);
 INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Café', '2017-06-10', null, 8.32, null, 'DESPESA', 1, 5);
 INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Eletrônicos', '2017-04-10', '2017-04-10', 2100.32, null, 'DESPESA', 5, 4);
 INSERT INTO lancamentos (descricao, data_vencimento, data_pagamento, valor, observacao, tipo, cod_categoria, cod_pessoa) values ('Instrumentos', '2017-06-10', null, 1040.32, null, 'DESPESA', 4, 3);

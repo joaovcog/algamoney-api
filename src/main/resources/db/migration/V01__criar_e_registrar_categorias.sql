@@ -8,3 +8,4 @@ INSERT INTO categorias (nome) values ('Alimentação');
 INSERT INTO categorias (nome) values ('Supermercado');
 INSERT INTO categorias (nome) values ('Farmácia');
 INSERT INTO categorias (nome) values ('Outros');
+INSERT INTO categorias (nome) values ('Informática');
