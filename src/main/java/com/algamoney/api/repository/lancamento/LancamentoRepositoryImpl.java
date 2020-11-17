@@ -47,8 +47,8 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 	@Override
 	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class);
-		Root<Lancamento> root = criteria.from(Lancamento.class);
+		CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class); //entidade a ser preenchida com os dados da query
+		Root<Lancamento> root = criteria.from(Lancamento.class); //faz a consulta nesta entidade
 		
 		criteria.select(builder.construct(ResumoLancamento.class, 
 				root.get(Lancamento_.CODIGO), root.get(Lancamento_.DESCRICAO), 
