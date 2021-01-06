@@ -2,7 +2,7 @@ package com.algamoney.api.repository.filter;
 
 public class PessoaFilter {
 
-	private String nome;
+	private String nome = "";
 
 	public String getNome() {
 		return nome;
