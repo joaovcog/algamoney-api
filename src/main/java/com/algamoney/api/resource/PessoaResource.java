@@ -42,7 +42,7 @@ public class PessoaResource {
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
 	public Page<Pessoa> pesquisar(PessoaFilter pessoaFilter, Pageable pageable) {
 		//return pessoaRepository.filtrar(pessoaFilter, pageable);
 		return pessoaRepository.findByNomeContainingIgnoreCase(pessoaFilter.getNome(), pageable);
