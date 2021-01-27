@@ -65,6 +65,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+		accessTokenConverter.setVerifierKey("algaworks");
 		accessTokenConverter.setSigningKey("algaworks"); //chave que valida o token
 		return accessTokenConverter;
 	}
