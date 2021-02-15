@@ -1,5 +1,6 @@
 package com.algamoney.api.repository.lancamento;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import com.algamoney.api.dto.LancamentoEstatisticaCategoria;
 import com.algamoney.api.model.Categoria_;
 import com.algamoney.api.model.Lancamento;
 import com.algamoney.api.model.Lancamento_;
@@ -28,6 +30,30 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 	@PersistenceContext
 	private EntityManager manager;
 
+	@Override
+	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia) {
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<LancamentoEstatisticaCategoria> criteria = builder.createQuery(LancamentoEstatisticaCategoria.class);
+		Root<Lancamento> root = criteria.from(Lancamento.class);
+		
+		criteria.select(builder.construct(LancamentoEstatisticaCategoria.class, 
+				root.get(Lancamento_.categoria), 
+				builder.sum(root.get(Lancamento_.valor))));
+		
+		LocalDate primeiroDia = mesReferencia.withDayOfMonth(1);
+		LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+		
+		criteria.where(
+					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), primeiroDia), 
+					builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), ultimoDia)
+				);
+		
+		criteria.groupBy(root.get(Lancamento_.categoria));
+		TypedQuery<LancamentoEstatisticaCategoria> query = manager.createQuery(criteria);
+		
+		return query.getResultList();
+	}
+	
 	@Override
 	public Page<Lancamento> filtrar(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
@@ -51,11 +77,11 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		Root<Lancamento> root = criteria.from(Lancamento.class); //faz a consulta nesta entidade
 		
 		criteria.select(builder.construct(ResumoLancamento.class, 
-				root.get(Lancamento_.CODIGO), root.get(Lancamento_.DESCRICAO), 
-				root.get(Lancamento_.DATA_VENCIMENTO), root.get(Lancamento_.DATA_PAGAMENTO), 
-				root.get(Lancamento_.VALOR), root.get(Lancamento_.TIPO), 
-				root.get(Lancamento_.CATEGORIA).get(Categoria_.NOME), 
-				root.get(Lancamento_.PESSOA).get(Pessoa_.NOME)));
+				root.get(Lancamento_.codigo), root.get(Lancamento_.descricao), 
+				root.get(Lancamento_.dataVencimento), root.get(Lancamento_.dataPagamento), 
+				root.get(Lancamento_.valor), root.get(Lancamento_.tipo), 
+				root.get(Lancamento_.categoria).get(Categoria_.nome), 
+				root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
 		
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
