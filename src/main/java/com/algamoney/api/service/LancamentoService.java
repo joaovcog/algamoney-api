@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.algamoney.api.dto.LancamentoEstatisticaPessoa;
@@ -68,7 +69,11 @@ public class LancamentoService {
 		
 		return JasperExportManager.exportReportToPdf(jasperPrint);
 	}
-
+	
+	@Scheduled(cron = "0 0 6 * * *")
+	public void avisarLancamentosVencidos() {
+		System.out.println(">>>>> Método sendo executado...");
+	}
 
 	private void validarPessoa(Lancamento lancamento) {
 		Optional<Pessoa> optPessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo());
