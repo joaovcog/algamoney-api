@@ -28,24 +28,6 @@ public class Mailer {
 	@Autowired
 	private TemplateEngine thymeleaf;
 	
-	
-//	@Autowired
-//	private LancamentoRepository repo;
-	
-//	@EventListener
-//	private void testar(ApplicationReadyEvent event) {
-//		String template = "mail/aviso-lancamentos-vencidos";
-//		
-//		List<Lancamento> lista = repo.findAll();
-//		
-//		Map<String, Object> variaveis = new HashMap<>();
-//		variaveis.put("lancamentos", lista);
-//		
-//		this.enviarEmail("jv.estudostestes@gmail.com", Arrays.asList(""), 
-//				"Testando", template, variaveis);
-//		System.out.println("Terminado o envio de e-mail...");
-//	}
-	
 	public void avisarSobreLancamentosVencidos(List<Lancamento> vencidos, 
 			List<Usuario> destinatarios) {
 		String remetente = "jv.estudostestes@gmail.com";
