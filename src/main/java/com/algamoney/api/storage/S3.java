@@ -40,7 +40,7 @@ public class S3 {
 		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
 
 		ObjectMetadata objectMetadata = new ObjectMetadata();
-		objectMetadata.setContentType(arquivo.getContentType());
+		objectMetadata.setContentType(arquivo.getContentType() + "; charset=utf-8");
 		objectMetadata.setContentLength(arquivo.getSize());
 
 		String nomeUnico = gerarNomeUnico(arquivo.getOriginalFilename());
