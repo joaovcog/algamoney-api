@@ -24,6 +24,7 @@ import com.algamoney.api.model.Categoria_;
 import com.algamoney.api.model.Lancamento;
 import com.algamoney.api.model.Lancamento_;
 import com.algamoney.api.model.Pessoa_;
+import com.algamoney.api.model.TipoLancamento;
 import com.algamoney.api.repository.filter.LancamentoFilter;
 import com.algamoney.api.repository.projection.ResumoLancamento;
 
@@ -33,7 +34,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 	private EntityManager manager;
 
 	@Override
-	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia) {
+	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia, TipoLancamento tipo) {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		CriteriaQuery<LancamentoEstatisticaCategoria> criteria = builder.createQuery(LancamentoEstatisticaCategoria.class);
 		Root<Lancamento> root = criteria.from(Lancamento.class);
@@ -46,6 +47,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
 		
 		criteria.where(
+					builder.equal(root.get(Lancamento_.tipo), tipo),
 					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), primeiroDia), 
 					builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), ultimoDia)
 				);

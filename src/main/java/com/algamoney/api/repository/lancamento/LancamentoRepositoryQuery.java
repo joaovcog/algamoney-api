@@ -10,12 +10,13 @@ import com.algamoney.api.dto.LancamentoEstatisticaCategoria;
 import com.algamoney.api.dto.LancamentoEstatisticaDia;
 import com.algamoney.api.dto.LancamentoEstatisticaPessoa;
 import com.algamoney.api.model.Lancamento;
+import com.algamoney.api.model.TipoLancamento;
 import com.algamoney.api.repository.filter.LancamentoFilter;
 import com.algamoney.api.repository.projection.ResumoLancamento;
 
 public interface LancamentoRepositoryQuery {
 	
-	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia);
+	public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia, TipoLancamento tipo);
 	public List<LancamentoEstatisticaDia> porDia(LocalDate mesReferencia);
 	public List<LancamentoEstatisticaPessoa> porPessoa(LocalDate dataInicial, LocalDate dataFinal);
 	

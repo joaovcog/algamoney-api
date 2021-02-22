@@ -40,6 +40,7 @@ import com.algamoney.api.dto.LancamentoEstatisticaDia;
 import com.algamoney.api.event.RecursoCriadoEvent;
 import com.algamoney.api.exceptionhandler.AlgamoneyExceptionHandler.Erro;
 import com.algamoney.api.model.Lancamento;
+import com.algamoney.api.model.TipoLancamento;
 import com.algamoney.api.repository.LancamentoRepository;
 import com.algamoney.api.repository.filter.LancamentoFilter;
 import com.algamoney.api.repository.projection.ResumoLancamento;
@@ -93,8 +94,8 @@ public class LancamentoResource {
 	
 	@GetMapping("/estatisticas/categoria")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
-	public List<LancamentoEstatisticaCategoria> porCategoria() {
-		return lancamentoRepository.porCategoria(LocalDate.now());
+	public List<LancamentoEstatisticaCategoria> porCategoria(TipoLancamento tipoLancamento) {
+		return lancamentoRepository.porCategoria(LocalDate.now(), tipoLancamento);
 	}
 	
 	@GetMapping("/estatisticas/dia")
