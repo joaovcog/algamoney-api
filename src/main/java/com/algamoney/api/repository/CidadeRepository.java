@@ -8,6 +8,6 @@ import com.algamoney.api.model.Cidade;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 	
-	public List<Cidade> findByEstadoCodigo(Long codEstado);
+	public List<Cidade> findByEstadoCodigoOrderByNomeAsc(Long codEstado);
 	
 }

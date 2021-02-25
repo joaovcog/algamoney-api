@@ -22,7 +22,7 @@ public class CidadeResource {
 	@GetMapping
 	@PreAuthorize("isAuthenticated()")
 	public List<Cidade> pesquisar(@RequestParam Long codEstado) {
-		return cidadeRepository.findByEstadoCodigo(codEstado);
+		return cidadeRepository.findByEstadoCodigoOrderByNomeAsc(codEstado);
 	}
 	
 }
